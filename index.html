@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>粉色侧边栏网站</title>
+    <title>我的爱恋之心 ❤</title>
     <style>
         * {
             margin: 0;
@@ -13,40 +13,42 @@
 
         body {
             background-color: white;
-            font-family: Arial, sans-serif;
+            font-family: 'Microsoft YaHei', sans-serif;
+            background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 3.8C12 0.2 6 0 6 6c0 5 9 12 9 12s9-7 9-12c0-6-6-5.8-9-2.2z' fill='%23ffb3c8' fill-opacity='0.1'/%3E%3C/svg%3E");
         }
 
+        /* 侧边栏样式 */
         .sidebar {
             position: fixed;
             left: 0;
             top: 0;
             width: 200px;
             height: 100vh;
-            background-color: #ff69b4;
+            background: linear-gradient(180deg, #ff69b4, #ff1493);
             padding: 20px;
             color: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
         }
 
+        /* 主内容区 */
         .main-content {
             margin-left: 200px;
-            padding: 30px;
+            padding: 40px;
+            min-height: 100vh;
         }
 
-        /* 导航基础样式 */
+        /* 导航样式 */
         .sidebar nav a {
             display: block;
             color: white;
             text-decoration: none;
-            padding: 10px 0;
+            padding: 12px 0;
             transition: 0.3s;
             position: relative;
+            font-size: 18px;
         }
 
-        .sidebar nav a:hover {
-            color: #ffd1e6;
-        }
-
-        /* 悬浮颜表情 */
+        /* 颜表情动画 */
         .sidebar nav a:hover::after {
             content: "ヽ(✿ﾟ▽ﾟ)ノ";
             position: absolute;
@@ -59,56 +61,87 @@
             font-size: 1.2em;
         }
 
-        /* 不同菜单不同表情 */
-        .sidebar nav a:nth-child(2):hover::after {
-            content: "(๑•̀ㅂ•́)و✧";
+        /* 不同菜单不同颜表情 */
+        .sidebar nav a:nth-child(2):hover::after { content: "(๑•̀ㅂ•́)و✧"; }
+        .sidebar nav a:nth-child(3):hover::after { content: "(≧∇≦)ﾉ"; }
+        .sidebar nav a:nth-child(4):hover::after { content: "(～￣▽￣)～"; }
+
+        /* 爱心飘落动画 */
+        .heart {
+            position: fixed;
+            top: -10%;
+            z-index: 9999;
+            animation: fall 8s linear infinite;
         }
 
-        .sidebar nav a:nth-child(3):hover::after {
-            content: "(≧∇≦)ﾉ";
-        }
-
-        .sidebar nav a:nth-child(4):hover::after {
-            content: "(～￣▽￣)～";
-        }
-
-        /* 动画效果 */
         @keyframes floatEmoji {
-            from {
-                opacity: 0;
-                transform: translateY(-50%) translateX(-10px);
-            }
+            from { opacity: 0; transform: translateY(-50%) translateX(-10px); }
+            to { opacity: 1; transform: translateY(-50%) translateX(0); }
+        }
+
+        @keyframes fall {
             to {
-                opacity: 1;
-                transform: translateY(-50%) translateX(0);
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
             }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .sidebar { width: 160px; }
+            .main-content { margin-left: 160px; }
         }
 
         @media (max-width: 600px) {
-            .sidebar {
-                display: none;
-            }
-            .main-content {
-                margin-left: 0;
-            }
+            .sidebar { display: none; }
+            .main-content { margin-left: 0; }
         }
     </style>
 </head>
 <body>
+    <!-- 飘落爱心生成脚本 -->
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤';
+            heart.classList.add('heart');
+            
+            // 随机属性
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+            heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.body.appendChild(heart);
+            
+            // 动画结束后移除元素
+            setTimeout(() => heart.remove(), 8000);
+        }
+
+        // 每0.5秒生成一个爱心
+        setInterval(createHeart, 500);
+    </script>
+
     <div class="sidebar">
-        <h2>导航菜单</h2>
+        <h2>心动轨迹 ❤</h2>
         <nav>
-            <a href="#home">首页</a>
-            <a href="#about">关于我们</a>
-            <a href="#services">服务项目</a>
-            <a href="#contact">联系我们</a>
+            <a href="#meet">初遇记忆</a>
+            <a href="#story">恋爱时光</a>
+            <a href="#promise">永恒之约</a>
+            <a href="#future">未来可期</a>
         </nav>
     </div>
 
     <div class="main-content">
-        <h1>欢迎来到我的网站</h1>
-        <p>这是一个带有粉色侧边栏的网页示例。</p>
-        <p>将鼠标悬停在左侧菜单上试试看！</p>
+        <h1>我的爱恋之心 ❤</h1>
+        <p>这是一封用代码写给你的情书</p>
+        <p>每一个像素都藏着我对你的心动...</p>
+        <div style="margin-top: 30px">
+            <p>❤ 鼠标触碰左侧菜单发现惊喜</p>
+            <p>✨ 漫天爱心都是想你的印记</p>
+            <p>🌸 我们的故事永远加载中...</p>
+        </div>
     </div>
 </body>
 </html>

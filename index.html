@@ -149,5 +149,87 @@
             <p>🌸 我们的故事永远加载中...</p>
         </div>
     </div>
+
+ <!-- 新增音乐播放器样式 -->
+    <style>
+        /* 隐藏原生播放控件 */
+        #bgm-player {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 40px;
+            opacity: 0.3;
+            transition: 0.3s;
+            z-index: 10000;
+        }
+
+        #bgm-player:hover {
+            opacity: 0.8;
+            transform: scale(1.1);
+        }
+
+        /* 音乐图标 */
+        .music-icon {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 30px;
+            height: 30px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ff69b4" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>');
+            cursor: pointer;
+            z-index: 10001;
+        }
+    </style>
+</head>
+<body>
+    <!-- 新增音乐播放器 -->
+    <audio id="bgm-player" loop controls>
+        <source src="bgm.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放
+    </audio>
+    <div class="music-icon" onclick="toggleMusic()"></div>
+
+    <!-- 原有页面内容保持不变 -->
+
+    <script>
+        // 自动播放处理（需要用户交互）
+        let musicPlayed = false;
+        
+        // 点击任意位置开始播放
+        document.body.addEventListener('click', function() {
+            if(!musicPlayed) {
+                const player = document.getElementById('bgm-player');
+                player.play();
+                musicPlayed = true;
+            }
+        });
+
+        // 音乐控制函数
+        function toggleMusic() {
+            const player = document.getElementById('bgm-player');
+            player.paused ? player.play() : player.pause();
+            player.paused ? 
+                document.querySelector('.music-icon').style.opacity = 0.3 :
+                document.querySelector('.music-icon').style.opacity = 0.8;
+        }
+
+        // 自动降低音量
+        document.getElementById('bgm-player').volume = 0.3;
+
+/* 修改音乐图标颜色 */
+.music-icon {
+    background: url('data:image/svg+xml;utf8,<svg ... fill="%23ff1493" ... />');
+}
+
+/* 调整播放器位置 */
+#bgm-player {
+    right: 30px;
+    bottom: 30px;
+}
+
+/* 修改初始音量 */
+document.getElementById('bgm-player').volume = 0.2; /* 20%音量 */
+    </script>
+
 </body>
 </html>

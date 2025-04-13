@@ -44,6 +44,13 @@
             min-height: 100vh;
         }
 
+        /* 调整播放器位置 */
+#bgm-player {
+    right: 30px;
+    bottom: 30px;
+}
+
+
         /* 导航样式 */
         .sidebar nav a {
             display: block;
@@ -230,11 +237,6 @@
     background: url('data:image/svg+xml;utf8,<svg ... fill="%23ff1493" ... />');
 }
 
-/* 调整播放器位置 */
-#bgm-player {
-    right: 30px;
-    bottom: 30px;
-}
 
 /* 修改初始音量 */
 document.getElementById('bgm-player').volume = 0.2; /* 20%音量 */

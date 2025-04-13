@@ -49,6 +49,10 @@
     right: 30px;
     bottom: 30px;
 }
+/* 修改音乐图标颜色 */
+.music-icon {
+    background: url('data:image/svg+xml;utf8,<svg ... fill="%23ff1493" ... />');
+}
 
 
         /* 导航样式 */
@@ -142,6 +146,35 @@
             setTimeout(() => heart.remove(), 8000);
         }
         setInterval(createHeart, 500);
+
+                // 自动播放处理（需要用户交互）
+        let musicPlayed = false;
+        
+        // 点击任意位置开始播放
+        document.body.addEventListener('click', function() {
+            if(!musicPlayed) {
+                const player = document.getElementById('bgm-player');
+                player.play();
+                musicPlayed = true;
+            }
+        });
+
+        // 音乐控制函数
+        function toggleMusic() {
+            const player = document.getElementById('bgm-player');
+            player.paused ? player.play() : player.pause();
+            player.paused ? 
+                document.querySelector('.music-icon').style.opacity = 0.3 :
+                document.querySelector('.music-icon').style.opacity = 0.8;
+        }
+
+        // 自动降低音量
+        document.getElementById('bgm-player').volume = 0.3;
+
+
+
+/* 修改初始音量 */
+document.getElementById('bgm-player').volume = 0.2; /* 20%音量 */
     </script>
 
     <div class="sidebar">
@@ -206,41 +239,6 @@
 
 
     <!-- 原有页面内容保持不变 -->
-
-    <script>
-        // 自动播放处理（需要用户交互）
-        let musicPlayed = false;
-        
-        // 点击任意位置开始播放
-        document.body.addEventListener('click', function() {
-            if(!musicPlayed) {
-                const player = document.getElementById('bgm-player');
-                player.play();
-                musicPlayed = true;
-            }
-        });
-
-        // 音乐控制函数
-        function toggleMusic() {
-            const player = document.getElementById('bgm-player');
-            player.paused ? player.play() : player.pause();
-            player.paused ? 
-                document.querySelector('.music-icon').style.opacity = 0.3 :
-                document.querySelector('.music-icon').style.opacity = 0.8;
-        }
-
-        // 自动降低音量
-        document.getElementById('bgm-player').volume = 0.3;
-
-/* 修改音乐图标颜色 */
-.music-icon {
-    background: url('data:image/svg+xml;utf8,<svg ... fill="%23ff1493" ... />');
-}
-
-
-/* 修改初始音量 */
-document.getElementById('bgm-player').volume = 0.2; /* 20%音量 */
-    </script>
 
 </body>
 </html>

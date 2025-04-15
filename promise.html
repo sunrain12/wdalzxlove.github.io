@@ -4,6 +4,45 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>粉色背景设置</title>
+    <style>
+        /* 基础浅粉色背景 */
+        body {
+            background-color: #fff5f5;  /* 标准浅粉色 */
+            min-height: 100vh;         /* 确保全屏高度 */
+            margin: 0;
+        }
+
+        /* 可选渐变效果 */
+        .gradient-bg {
+            background: linear-gradient(
+                135deg,
+                #FFF0F5 0%,
+                #FFE4E1 50%,
+                #FFF0F5 100%
+            );
+        }
+
+        /* 可选纹理效果 */
+        .texture-bg {
+            background-image: 
+                radial-gradient(circle at 10% 10%, 
+                    rgba(255,182,193,0.1) 0%, 
+                    rgba(255,182,193,0) 20%),
+                radial-gradient(circle at 90% 90%, 
+                    rgba(255,105,180,0.1) 0%, 
+                    rgba(255,105,180,0) 20%);
+        }
+    </style>
+</head>
+<body class="texture-bg"> <!-- 选择需要的class -->
+    <!-- 页面内容 -->
+
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>永恒之约</title>

@@ -1,18 +1,218 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>未来可期</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星雨之恋</title>
     <style>
         body {
-            background: #fff0fa;
-            padding: 40px;
-            font-family: 'Microsoft YaHei';
+            background: #0a0a23;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
         }
-        h1 { color: #ff6b6b; }
+
+        /* 星星特效 */
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        /* 雨滴特效 */
+        .raindrop {
+            position: absolute;
+            width: 1px;
+            height: 15px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
+            animation: fall 2s linear infinite;
+        }
+
+        /* 涟漪特效 */
+        .ripple {
+            position: absolute;
+            border: 2px solid rgba(135, 206, 250, 0.5);
+            border-radius: 50%;
+            animation: spread 1s ease-out;
+        }
+
+        /* 核心爱心 */
+        .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120px;
+            height: 120px;
+            transform: translate(-50%, -50%);
+            background: #ff69b4;
+            clip-path: path('M60 30C60 0 0 0 0 30c0 30 60 90 60 90s60-60 60-90c0-30-60-30-60 0z');
+            animation: heartbeat 1.2s infinite;
+            filter: drop-shadow(0 0 20px #ff69b4);
+        }
+
+        /* 动画定义 */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+
+        @keyframes spread {
+            to { transform: scale(20); opacity: 0; }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            15% { transform: translate(-50%, -50%) scale(1.3); }
+            30% { transform: translate(-50%, -50%) scale(1); }
+            45% { transform: translate(-50%, -50%) scale(1.15); }
+            60% { transform: translate(-50%, -50%) scale(1); }
+        }
     </style>
 </head>
 <body>
-    <h1>🌠 未来蓝图 🌠</h1>
-    <p>我们即将共同书写的新篇章...</p>
+    <div class="heart"></div>
+
+    <script>
+        // 生成星星
+        function createStars() {
+            for(let i=0; i<200; i++){
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.cssText = `
+                    left: ${Math.random()*100}vw;
+                    top: ${Math.random()*100}vh;
+                    animation-duration: ${2+Math.random()*3}s;
+                `;
+                document.body.appendChild(star);
+            }
+        }
+
+        // 生成雨滴
+        function createRain() {
+            setInterval(() => {
+                const drop = document.createElement('div');
+                drop.className = 'raindrop';
+                drop.style.left = Math.random()*100 + 'vw';
+                drop.style.animationDuration = 1 + Math.random()*2 + 's';
+                
+                // 添加涟漪效果
+                drop.addEventListener('animationend', () => {
+                    createRipple(drop.offsetLeft, window.innerHeight);
+                    drop.remove();
+                });
+
+                document.body.appendChild(drop);
+            }, 50);
+        }
+
+        // 创建涟漪
+        function createRipple(x, y) {
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            ripple.addEventListener('animationend', () => ripple.remove());
+            document.body.appendChild(ripple);
+        }
+
+        // 点击特效
+        document.addEventListener('click', (e) => {
+            createRipple(e.clientX, e.clientY);
+        });
+
+        // 初始化
+        createStars();
+        createRain();
+
+        // 窗口尺寸变化时重置
+        window.addEventListener('resize', () => {
+            document.querySelectorAll('.star, .raindrop').forEach(el => el.remove());
+            createStars();
+        });
+    </script>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 保持之前所有样式不变 -->
+    <style>
+        /* 新增结局文字特效 */
+        .our-ending {
+            position: fixed;
+            bottom: 20%;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            font-family: 'Microsoft YaHei';
+            font-size: 2.5em;
+            text-shadow: 
+                0 0 10px #ff69b4,
+                0 0 20px #ff1493,
+                0 0 30px #ff85c0;
+            animation: 
+                fadeIn 2s ease-out,
+                float 3s ease-in-out infinite;
+            z-index: 1000;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .our-ending {
+                font-size: 1.8em;
+                bottom: 15%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 在爱心元素后添加 -->
+    <div class="heart-core">
+        <!-- 原有爱心代码 -->
+    </div>
+    
+    <!-- 新增结局文字 -->
+    <div class="our-ending">✧ 将结局写成我们想要的样子 ✧</div>
+
+    <script>
+        // 添加文字互动特效
+        const endingText = document.querySelector('.our-ending');
+        
+        endingText.addEventListener('click', function() {
+            this.style.textShadow = `
+                0 0 20px #ff69b4,
+                0 0 40px #ff1493,
+                0 0 60px #ff85c0`;
+            
+            setTimeout(() => {
+                this.style.textShadow = `
+                    0 0 10px #ff69b4,
+                    0 0 20px #ff1493,
+                    0 0 30px #ff85c0`;
+            }, 500);
+        });
+
+        // 随机微调文字位置
+        setInterval(() => {
+            endingText.style.transform = `translateY(${Math.sin(Date.now()/1000)*5}px)`;
+        }, 50);
+    </script>
+
 </body>
 </html>
